@@ -1,0 +1,25 @@
+CPPFLAG = -wall
+MODULES = $(shell find . -maxdepth 1 -type d ! -iname .)
+SRC_FIELS = $(wildcard *.cpp)
+TARGET_OBJ_FILES = $(patsubst %.cpp, %.o, $(SRC_FILES))
+ALL_OBJ_FILES = $(wildcard $(OBJDIR)*.o)
+LIB_SRC_FILES = $(shell find . -iname *.cpp)
+all: obj  $(BIN) $(LIB)
+
+
+obj: $(OBJ_FILES)
+
+ifneq ($(OBJ_FILES),)
+%.o : %.cpp
+	$(CC) -c $(CPPFLAG) $< -o $(BUILDDIR)/$@
+$(OBJ_FILES): $(SRC_FIELS)
+endif
+
+
+
+ifneq ($(BIN),)
+$(BIN): obj
+	$(CC) $(CPPFLAG) -o $(ALL_OBJ_FILES) 
+endif
+
+

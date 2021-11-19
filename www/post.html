@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+
+<body>
+<form class="form" action="" method="post">
+<input type="text" id="zhanghao" placeholder="请输入账号" />
+<input type="password" id='pass' placeholder="请输入密码" />
+<label for="bc"><input id="bc" type="radio" name="bc" value="1" />保存</label><label for="bbc"><input type="radio" id="bbc" name="bc" value="0"  />不保存</label>
+<input type="submit" value="确定" />
+</form>
+</body>
+<style>
+form{width:500px;height:500px;position:absolute;top:50%;left:50%;margin-left:-250px;margin-top:-250px;}
+input[type="text"],input[type="password"]{outline:medium;width:400px;height:40px;margin:20px 50px;text-indent: 1em;}
+input[type="submit"]{display:block;width:300px;margin-left:100px;margin-top:20px;background-color:#f50;color:#fff;border:none;height:40px;border-radius:10px;}
+label{margin:0 50px;}
+</style>
+<script>
+var bc=document.querySelector("#bc");
+var bbc=document.querySelector("#bbc");
+var form=document.querySelector(".form");
+var zhanghao=document.querySelector("#zhanghao");
+var pass=document.querySelector("#pass");
+if(typeof(Storage)!=="undefined")
+{
+  if(localStorage.zhanghao_strorage && localStorage.pass_strorage && localStorage.bc_strorage){
+  zhanghao.value=localStorage.zhanghao_strorage;
+  pass.value=localStorage.pass_strorage;
+  bc.setAttribute("checked","checked")
+  }
+} else {
+    // 抱歉! 不支持 web 存储。
+}
+form.οnsubmit=function(){
+if(typeof(Storage)!=="undefined")
+{
+  if(bc.checked){
+  console.log("保存")
+  var zhanghao_val=zhanghao.value;
+  var pass_val=pass.value;
+  localStorage.setItem("zhanghao_strorage",zhanghao_val);
+  localStorage.setItem("pass_strorage",pass_val);
+  localStorage.setItem("bc_strorage","bc");
+  }else{
+  localStorage.clear();//移除所有；
+  }
+} else {
+    // 抱歉! 不支持 web 存储。
+}
+}
+</script>
+
+</html>
